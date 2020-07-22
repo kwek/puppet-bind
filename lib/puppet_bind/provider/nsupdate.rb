@@ -110,7 +110,13 @@ module PuppetBind
       end
 
       def rrdata_adds
-        resource[:ensure] === :absent ? [] : newdata - rrdata
+
+        if (@properties[:ttl] == nil)
+            resource[:ensure] === :absent ? [] : newdata - rrdata
+        else
+            resource[:ensure] === :absent ? [] : newdata
+        end
+
       end
 
       def rrdata_deletes
